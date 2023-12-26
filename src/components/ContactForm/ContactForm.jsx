@@ -7,7 +7,7 @@ import {
 import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'store/contactsSlice.js';
+import { addContactsThunk } from 'store/operations.js';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
@@ -24,11 +24,15 @@ export const ContactForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (contacts.some(contact => contact.name === name)) {
+    if (
+      contacts.some(
+        contact => contact.name.toLowerCase() === name.toLowerCase()
+      )
+    ) {
       alert(`Such a contact already exists!`);
       return;
     }
-    dispatch(addContact({ name, number, id: nanoid() }));
+    dispatch(addContactsThunk({ name, number, id: nanoid() }));
     setName('');
     setNumber('');
   };

@@ -3,14 +3,13 @@ import {
   StyledText,
 } from 'components/ContactForm/ContactForm.styled';
 import { useDispatch } from 'react-redux';
-import { searchContacts } from 'store/contactsSlice';
+import { searchContacts } from 'store/contactsBookSlice';
 
 export const Filter = () => {
   const dispatch = useDispatch();
 
   const handleInputChange = e => {
     const inputSearch = searchContacts(e.target.value);
-
     dispatch(inputSearch);
   };
   return (
