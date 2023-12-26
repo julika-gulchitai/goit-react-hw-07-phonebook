@@ -5,15 +5,15 @@ import {
   StyledLabel,
 } from './ContactForm.styled.js';
 import React, { useState } from 'react';
-import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContactsThunk } from 'store/operations.js';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts.contacts);
+  const contacts = useSelector(state => state.contacts.contacts.items);
 
   const handleInputName = e => {
     setName(e.target.value);
@@ -32,7 +32,7 @@ export const ContactForm = () => {
       alert(`Such a contact already exists!`);
       return;
     }
-    dispatch(addContactsThunk({ name, number, id: nanoid() }));
+    dispatch(addContactsThunk({ name, number }));
     setName('');
     setNumber('');
   };

@@ -2,14 +2,16 @@ import {
   StyledInput,
   StyledText,
 } from 'components/ContactForm/ContactForm.styled';
-import { useDispatch } from 'react-redux';
-import { searchContacts } from 'store/contactsBookSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFilter } from 'store/contactsBookSlice';
 
 export const Filter = () => {
   const dispatch = useDispatch();
+  const filter = useSelector(setFilter);
 
   const handleInputChange = e => {
-    const inputSearch = searchContacts(e.target.value);
+    const inputSearch = setFilter(e.target.value);
+    console.log(inputSearch);
     dispatch(inputSearch);
   };
   return (

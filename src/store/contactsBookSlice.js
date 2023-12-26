@@ -5,7 +5,7 @@ import {
   fetchContactsThunk,
 } from './operations';
 
-const contactsInitialState = {
+const initialState = {
   contacts: {
     items: [],
     error: null,
@@ -29,9 +29,9 @@ const handlerejected = (state, action) => {
 };
 export const contactsBookSlice = createSlice({
   name: 'contactsBook',
-  initialState: contactsInitialState,
+  initialState,
   reducers: {
-    searchContacts: (state, action) => {
+    setFilter: (state, action) => {
       state.filter = action.payload;
     },
   },
@@ -52,18 +52,13 @@ export const contactsBookSlice = createSlice({
       .addCase(deleteContactsThunk.pending, handlepending)
       .addCase(deleteContactsThunk.fulfilled, (state, action) => {
         handlefulfilled(state);
-      });
-
-    // addContact: (state, action) => {
-    //   state.contacts.push(action.payload);
-    // },
-    // deleteContacts: (state, action) => {
-    //   state.contacts = state.contacts.filter(
-    //     contact => contact.id !== action.payload
-    //   );
-    // },
-    // ,
+        const i = state.contacts.items.findIndex(
+          contact => contact.id === action.payload
+        );
+        state.contacts.items.splice(i, 1);
+      })
+      .addCase(deleteContactsThunk.rejected, handlerejected);
   },
 });
 export const contactsBookReducer = contactsBookSlice.reducer;
-export const { searchContacts } = contactsBookSlice.actions;
+export const { setFilter } = contactsBookSlice.actions;
