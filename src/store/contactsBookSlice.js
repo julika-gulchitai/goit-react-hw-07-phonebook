@@ -52,10 +52,9 @@ export const contactsBookSlice = createSlice({
       .addCase(deleteContactsThunk.pending, handlepending)
       .addCase(deleteContactsThunk.fulfilled, (state, action) => {
         handlefulfilled(state);
-        const i = state.contacts.items.findIndex(
-          contact => contact.id === action.payload
+        state.contacts.items = state.contacts.items.filter(
+          contact => contact.id !== action.payload.id
         );
-        state.contacts.items.splice(i, 1);
       })
       .addCase(deleteContactsThunk.rejected, handlerejected);
   },

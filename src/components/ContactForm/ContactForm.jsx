@@ -7,13 +7,14 @@ import {
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContactsThunk } from 'store/operations.js';
+import { selectContacts } from 'store/selectors.js';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts.contacts.items);
+  const contacts = useSelector(selectContacts);
 
   const handleInputName = e => {
     setName(e.target.value);

@@ -10,6 +10,9 @@ export const Container = styled.div`
    display: flex;
    align-items: center;
    font-size: 18px;
+   background: #ecffda;
+   width: 800px;
+   margin: 0 auto;
 `;
 export const StyledForm = styled.form`
   border: 1px solid lightblue;
@@ -74,10 +77,16 @@ export const StyledContactsList = styled.li`
   color: grey;
   text-decoration: none;
   display: block;
-  width: 400px;
+  width: 600px;
 `;
 
 export const StyledContacts = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const ContactsWrap = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
